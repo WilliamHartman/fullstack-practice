@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import './Private.css';
+import { getUserInfo } from './../../ducks/users';
+import { connect } from 'react-redux';
 
-export default class Private extends Component {
+class Private extends Component {
 
+    componentDidMount = () => {
+      this.props.getUserInfo();
+    }
+    
     render(){
         return (
             <div>
@@ -11,3 +17,11 @@ export default class Private extends Component {
         )
     }
 }
+
+function mapStateToProps(state){
+    return {
+        userData: state.user
+    }
+}
+
+export default connect(mapStateToProps, { getUserInfo } )(Private);
